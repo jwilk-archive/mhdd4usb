@@ -1,0 +1,35 @@
+Overview
+========
+
+.. code:: console
+
+   $ wget --no-check-cert -nv 'https://hddguru.com/download/dl.php?file=c29mdHdhcmUvbWhkZC9taGRkMzJ2ZXI0LjZpc28uemlw' -O mhdd32ver4.6iso.zip
+   2022-01-05 17:13:23 URL:https://hddguru.com/download/dl.php?file=c29mdHdhcmUvbWhkZC9taGRkMzJ2ZXI0LjZpc28uemlw [460111/460111] -> "mhdd32ver4.6iso.zip" [1]
+
+   $ unzip mhdd32ver4.6iso.zip
+   Archive:  mhdd32ver4.6iso.zip
+     inflating: mhdd32ver4.6.iso
+
+   $ mhdd4usb mhdd32ver4.6.iso > mhdd.disk
+
+   $ qemu mhdd.disk  # smoke test under QEMU
+   ⋮
+   Loading memdisk... ok
+   Loading mhdd.iso...ok
+   ⋮
+   Loading boot sector... booting...
+   Starting Windows 98...
+   ⋮
+
+   $ cp mhdd.disk /dev/disk/by-id/usb-Generic_USB_Flash_Disk_00000000000042-0:0  # copy to the USB stick
+
+Prerequisites
+=============
+
+* mtools
+
+* syslinux
+
+* eatmydata (optional)
+
+.. vim:ft=rst ts=3 sts=3 sw=3 et

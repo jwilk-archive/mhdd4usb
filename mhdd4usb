@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Copyright © 2022 Jakub Wilk <jwilk@jwilk.net>
+# SPDX-License-Identifier: MIT
+
+set -e -u
+
+prog="${0##*/}"
+usage()
+{
+    printf 'Usage: %s ISO-IMAGE > DISK\n' "$prog"
+}
+if [ $# -ne 1 ]
+then
+    usage >&2
+    exit 1
+fi
+if [ "$1" = '-h' ] || [ "$1" = '--help' ]
+then
+    usage
+    exit 0
+fi
+if tty <&1 >/dev/null
+then
+    printf '%s: stdout is a tty\n' "$prog" >&2
+    exit 1
+fi
+iso="$1"
+stat "$iso" > /dev/null
+tmpdir=$(mktemp -d -t mhdd4usb.XXXXXX)
+out="$tmpdir/out"
+truncate -s 2M "$out"
+mformat -i "$out" -v MHDD
+mcopy -i "$out" /usr/lib/syslinux/memdisk ::
+eatmydata()
+{
+    if command -v eatmydata
+    then
+        command eatmydata "$@"
+    else
+        "$@"
+    fi
+}
+eatmydata syslinux -i "$out"
+cat > "$tmpdir/syslinux.cfg" <<EOF
+DEFAULT mhdd
+LABEL mhdd
+LINUX memdisk
+INITRD mhdd.iso
+APPEND iso
+EOF
+mcopy -i "$out" "$tmpdir/syslinux.cfg" ::
+mcopy -i "$out" "$iso" ::mhdd.iso
+cat "$out"
+rm -rf "$tmpdir"
+
+# vim:ts=4 sts=4 sw=4 et
