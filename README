@@ -21,7 +21,7 @@ Overview
    Starting Windows 98...
    ⋮
 
-   $ cp mhdd.disk /dev/disk/by-id/usb-Generic_USB_Flash_Disk_00000000000042-0:0  # copy to the USB stick
+   $ sudo cp mhdd.disk /dev/disk/by-id/usb-Generic_USB_Flash_Disk_00000000000042-0:0  # copy to the USB stick
 
 Prerequisites
 =============
