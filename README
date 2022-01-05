@@ -3,7 +3,7 @@ Overview
 
 .. code:: console
 
-   $ wget -nv 'https://hddguru.com/download/dl.php?file=c29mdHdhcmUvbWhkZC9taGRkMzJ2ZXI0LjZpc28uemlw' -O mhdd32ver4.6iso.zip
+   $ wget -nv --content-disposition 'https://hddguru.com/download/dl.php?file=c29mdHdhcmUvbWhkZC9taGRkMzJ2ZXI0LjZpc28uemlw'
    2022-01-05 17:13:23 URL:https://hddguru.com/download/dl.php?file=c29mdHdhcmUvbWhkZC9taGRkMzJ2ZXI0LjZpc28uemlw [460111/460111] -> "mhdd32ver4.6iso.zip" [1]
 
    $ unzip mhdd32ver4.6iso.zip
