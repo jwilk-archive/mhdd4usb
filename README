@@ -12,7 +12,7 @@ Overview
 
    $ mhdd4usb mhdd32ver4.6.iso > mhdd.disk
 
-   $ qemu mhdd.disk  # smoke test under QEMU
+   $ qemu-system-x86_64 mhdd.disk  # smoke test under QEMU
    ⋮
    Loading memdisk... ok
    Loading mhdd.iso...ok
