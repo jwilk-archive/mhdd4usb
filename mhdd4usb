@@ -34,7 +34,7 @@ mformat -i "$out" -v MHDD
 mcopy -i "$out" /usr/lib/syslinux/memdisk ::
 eatmydata()
 {
-    if command -v eatmydata
+    if command -v eatmydata > /dev/null
     then
         command eatmydata "$@"
     else
